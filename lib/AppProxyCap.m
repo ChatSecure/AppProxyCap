@@ -87,24 +87,21 @@ static CFDictionaryRef new_SCDynamicStoreCopyProxies (SCDynamicStoreRef store) {
 }
 
 +(void)setNoProxy {
-    [proxyPref release];
     proxyPref = NULL;
 }
 
 +(void)setPACURL:(NSString *)pacURL {
-	[proxyPref release];
-    proxyPref = [[NSDictionary dictionaryWithObjectsAndKeys:
+    proxyPref = [NSDictionary dictionaryWithObjectsAndKeys:
                   [NSNumber numberWithInt:1], @"ProxyAutoConfigEnable",
                   pacURL, @"ProxyAutoConfigURLString",
-                  nil] retain];
+                  nil];
     
 }
 
 + (void) setProxy:(AppProxyType)type Host:(NSString *)host Port:(int)port {
-	[proxyPref release];
 	switch (type) {
 		case AppProxy_HTTP:
-			proxyPref = [[NSDictionary dictionaryWithObjectsAndKeys:
+			proxyPref = [NSDictionary dictionaryWithObjectsAndKeys:
 							//[NSNumber numberWithInt:1], @"HTTPProxyType",
 							//[NSNumber numberWithInt:0], @"ProxyAutoConfigEnable",
 							[NSNumber numberWithInt:1], @"HTTPEnable",
@@ -113,7 +110,7 @@ static CFDictionaryRef new_SCDynamicStoreCopyProxies (SCDynamicStoreRef store) {
 							[NSNumber numberWithInt:1], @"HTTPSEnable",
 							host, @"HTTPSProxy",
 							[NSNumber numberWithInt:port], @"HTTPSPort",
-							nil] retain];
+							nil];
 			/*
 			proxyType = kCFStreamPropertyHTTPProxy;
 			proxySetting = [NSMutableDictionary dictionaryWithObjectsAndKeys:
@@ -125,11 +122,11 @@ static CFDictionaryRef new_SCDynamicStoreCopyProxies (SCDynamicStoreRef store) {
 			 */ 
 			break;
         case AppProxy_SOCKS:
-			proxyPref = [[NSDictionary dictionaryWithObjectsAndKeys:
+			proxyPref = [NSDictionary dictionaryWithObjectsAndKeys:
                           [NSNumber numberWithInt:1], @"SOCKSEnable",
                           host, @"SOCKSProxy",
                           [NSNumber numberWithInt:port], @"SOCKSPort",
-                          nil] retain];
+                          nil];
             break;
             
 			
